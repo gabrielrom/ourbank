@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  database: 
+    image: postgres
+    container_name: ourbank_database
+    ports: 
+      - 5432:5432
+    environment: 
+      - POSTGRES_USER=ourbank
+      - POSTGRES_PASSWORD=ourbank
+      - POSTGRES_DB=ourbank_database
+    volumes: 
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata: 
+    driver: local
