@@ -27,6 +27,13 @@ namespace ourbank.entities {
     [Column]
     public string account_id { get; set; }
 
+    [Column(TypeName = "timestamp")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime created_at { get; set; }
+    
+    [Column(TypeName = "timestamp")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime updated_at { get; set; }
     public User() {
       if (String.IsNullOrEmpty(this.id)) {
         this.id = Convert.ToString(Guid.NewGuid());
