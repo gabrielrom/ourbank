@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace ourbank {
   public class Startup {
@@ -21,6 +22,11 @@ namespace ourbank {
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
+      services.AddEntityFrameworkNpgsql()
+      .AddDbContext<DBContext.DBContext>(options => options.UseNpgsql(
+        Configuration.GetConnectionString("DBUrl")
+      ));
+
       services.AddControllers();
     }
 
