@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ourbank.entities {
+  [Table("Users")]
   public class User {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
