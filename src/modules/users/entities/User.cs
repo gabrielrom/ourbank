@@ -2,11 +2,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ourbank.entities {
+namespace ourbank.entities{
   [Table("Users")]
-  public class User {
+  public class User : BaseEntity {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string id { get; private set; }
 
     [Column]
@@ -27,13 +26,6 @@ namespace ourbank.entities {
     [Column]
     public string account_id { get; set; }
 
-    [Column(TypeName = "timestamp")]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public DateTime created_at { get; set; }
-    
-    [Column(TypeName = "timestamp")]
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime updated_at { get; set; }
     public User() {
       if (String.IsNullOrEmpty(this.id)) {
         this.id = Convert.ToString(Guid.NewGuid());
