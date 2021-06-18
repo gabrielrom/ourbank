@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ourbank.Repositories;
+using ourbank.Error;
 
 namespace ourbank {
   public class Startup {
@@ -41,6 +42,7 @@ namespace ourbank {
       app.UseHttpsRedirection();
 
       app.UseRouting();
+      app.UseMiddleware<GlobalError>();
 
       app.UseAuthorization();
 
