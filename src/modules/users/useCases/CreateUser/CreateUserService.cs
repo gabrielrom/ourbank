@@ -1,6 +1,7 @@
 using ourbank.entities;
 using ourbank.Repositories;
 using ourbank.Error;
+using BC = BCrypt.Net.BCrypt;
 
 namespace ourbank.sevices {
   public class CreateUserService {
@@ -30,10 +31,12 @@ namespace ourbank.sevices {
         throw new AppError("this email is already exits!");
       }
 
+      string hashedPassword = BC.HashPassword(data.password);
+
       User user = this._usersRepository.create(new ICreateDTO {
         name = data.name,
         email = data.email,
-        password = data.password
+        password = hashedPassword
       });
 
       return user;
