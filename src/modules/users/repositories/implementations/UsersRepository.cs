@@ -1,3 +1,4 @@
+using System.Linq;
 using ourbank.entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,14 @@ namespace ourbank.Repositories {
 
       _repository.Users.Add(user);
       _repository.SaveChanges();
+
+      return user;
+    }
+
+    public User findByEmail(string email) {
+      User user = _repository.Users.FirstOrDefault(user => 
+        user.email == email
+      );
 
       return user;
     }
