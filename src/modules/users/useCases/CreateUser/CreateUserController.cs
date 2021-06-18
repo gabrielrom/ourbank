@@ -28,7 +28,14 @@ namespace ourbank.Controllers {
         password = request.password
       });
 
-      return StatusCode(201, user);
+      return StatusCode(201, new {
+        name = user.name,
+        email = user.email,
+        avatar_url = user.avatar_url,
+        account_id = user.account_id,
+        created_at = user.created_at,
+        updated_at = user.updated_at,
+      });
     }
   }
 }
