@@ -13,9 +13,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ourbank.Repositories;
 using ourbank.Error;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
 namespace ourbank {
   public class Startup {
@@ -32,27 +29,8 @@ namespace ourbank {
         Configuration.GetConnectionString("DBUrl")
       ));
 
-      services.AddCors();
       services.AddControllers();
       services.AddScoped<IUsersRepository, UsersRepository>();
-
-      string secretToken = Configuration.GetConnectionString("SecretToken");
-      var key = Encoding.ASCII.GetBytes(secretToken);
-
-      services.AddAuthentication(x => {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-      })
-      .AddJwtBearer(x => {
-        x.RequireHttpsMetadata = false;
-        x.SaveToken = true;
-        x.TokenValidationParameters = new TokenValidationParameters {
-          ValidateIssuerSigningKey = true,
-          IssuerSigningKey = new SymmetricSecurityKey(key),
-          ValidateIssuer = false,
-          ValidateAudience = false,
-        };
-      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,14 +42,8 @@ namespace ourbank {
       app.UseHttpsRedirection();
 
       app.UseRouting();
-
-      app.UseCors(x => x
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-      );
-
       app.UseMiddleware<GlobalError>();
+
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints => {
