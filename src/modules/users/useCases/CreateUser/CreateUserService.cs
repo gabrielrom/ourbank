@@ -7,9 +7,16 @@ namespace ourbank.sevices {
   public class CreateUserService {
 
     private IUsersRepository _usersRepository;
+    private IAccountsRepository _accountsRepository;
 
-    public CreateUserService(IUsersRepository usersRepository) {
+
+    public CreateUserService(
+      IUsersRepository usersRepository, 
+      IAccountsRepository accountsRepository
+    ) {
       this._usersRepository = usersRepository;
+      this._accountsRepository = accountsRepository;
+      ;
     }
     
     public User execute(ICreateDTO data) {
@@ -33,10 +40,13 @@ namespace ourbank.sevices {
 
       string hashedPassword = BC.HashPassword(data.password);
 
+      Account account = this._accountsRepository.create();
+
       User user = this._usersRepository.create(new ICreateDTO {
         name = data.name,
         email = data.email,
-        password = hashedPassword
+        password = hashedPassword,
+        account_id = account.id
       });
 
       return user;
