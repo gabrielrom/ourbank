@@ -35,6 +35,7 @@ namespace ourbank {
       services.AddCors();
       services.AddControllers();
       services.AddScoped<IUsersRepository, UsersRepository>();
+      services.AddScoped<IAccountsRepository, AccountsRepository>();
 
       string secretToken = Configuration.GetConnectionString("SecretToken");
       var key = Encoding.ASCII.GetBytes(secretToken);
