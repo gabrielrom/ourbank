@@ -2,16 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ourbank.DBContext;
 
 namespace ourbank.src.shared.database.EFCore.Migrations
 {
-    [DbContext(typeof(DBContext.DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+  [DbContext(typeof(DBContext.DBContext))]
+    [Migration("20210620192714_AddAccountsTable")]
+    partial class AddAccountsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +40,10 @@ namespace ourbank.src.shared.database.EFCore.Migrations
 
                     b.Property<DateTime>("updated_at")
                         .HasColumnType("timestamp");
+
+                    b.Property<string>("user_id")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("id");
 
@@ -77,18 +81,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("account_id");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ourbank.entities.User", b =>
-                {
-                    b.HasOne("ourbank.entities.Account", "account")
-                        .WithOne()
-                        .HasForeignKey("FK_Users_Accounts_account_id");
-
-                    b.Navigation("account");
                 });
 #pragma warning restore 612, 618
         }
