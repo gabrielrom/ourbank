@@ -25,6 +25,9 @@ namespace ourbank.entities{
 
     [Column]
     public string account_id { get; set; }
+    
+    [ForeignKey("account_id")]
+    public Account account { get; set; }
 
     public User() {
       if (String.IsNullOrEmpty(this.id)) {

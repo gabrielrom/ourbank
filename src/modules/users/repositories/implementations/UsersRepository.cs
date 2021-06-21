@@ -16,6 +16,7 @@ namespace ourbank.Repositories {
       user.name = data.name;
       user.email = data.email;
       user.password = data.password;
+      user.account_id = data.account_id;
 
       _repository.Users.Add(user);
       _repository.SaveChanges();

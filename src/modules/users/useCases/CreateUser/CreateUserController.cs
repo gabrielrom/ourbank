@@ -16,8 +16,14 @@ namespace ourbank.Controllers {
 
     private CreateUserService _createUserService;
 
-    public CreateUserController(IUsersRepository usersRepository) {
-      this._createUserService = new CreateUserService(usersRepository);
+    public CreateUserController(
+      IUsersRepository usersRepository,
+      IAccountsRepository accountsRepository
+    ) {
+      this._createUserService = new CreateUserService(
+        usersRepository, 
+        accountsRepository
+      );
     }
 
     [HttpPost]
