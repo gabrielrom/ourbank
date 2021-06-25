@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ourbank.DBContext;
@@ -9,9 +10,10 @@ using ourbank.DBContext;
 namespace ourbank.src.shared.database.EFCore.Migrations
 {
     [DbContext(typeof(DBContext.DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210625192416_AddAccountIsFirstDepositColumn")]
+    partial class AddAccountIsFirstDepositColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

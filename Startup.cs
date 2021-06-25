@@ -73,8 +73,9 @@ namespace ourbank {
       );
 
       app.UseMiddleware<GlobalError>();
+      app.UseAuthentication();
       app.UseAuthorization();
-
+      
       app.UseEndpoints(endpoints => {
         endpoints.MapControllers();
       });

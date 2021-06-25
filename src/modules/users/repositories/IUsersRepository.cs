@@ -11,5 +11,6 @@ namespace ourbank.Repositories {
   public interface IUsersRepository {
     User create(ICreateDTO data);
     User findByEmail(string email);
+    User findById(string user_id);
   }
 }
