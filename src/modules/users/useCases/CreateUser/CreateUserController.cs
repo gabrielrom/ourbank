@@ -38,7 +38,7 @@ namespace ourbank.Controllers {
         name = user.name,
         email = user.email,
         avatar_url = user.avatar_url,
-        account_id = user.account_id,
+        account_id = user.accountId,
         created_at = user.created_at,
         updated_at = user.updated_at,
       });

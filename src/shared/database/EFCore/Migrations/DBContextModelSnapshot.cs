@@ -51,8 +51,9 @@ namespace ourbank.src.shared.database.EFCore.Migrations
                     b.Property<string>("id")
                         .HasColumnType("text");
 
-                    b.Property<string>("account_id")
-                        .HasColumnType("text");
+                    b.Property<string>("accountId")
+                        .HasColumnType("text")
+                        .HasColumnName("account_id");
 
                     b.Property<string>("avatar_url")
                         .HasColumnType("text");
@@ -77,7 +78,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("account_id");
+                    b.HasIndex("accountId");
 
                     b.ToTable("Users");
                 });
@@ -85,8 +86,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
             modelBuilder.Entity("ourbank.entities.User", b =>
                 {
                     b.HasOne("ourbank.entities.Account", "account")
-                        .WithOne()
-                        .HasForeignKey("FK_Users_Accounts_account_id");
+                        .WithOne();
 
                     b.Navigation("account");
                 });

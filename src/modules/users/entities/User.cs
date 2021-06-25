@@ -23,10 +23,9 @@ namespace ourbank.entities{
     [Column]
     public string avatar_url { get; set; }
 
-    [Column]
-    public string account_id { get; set; }
+    [Column("account_id")]
+    public string accountId { get; set; }
     
-    [ForeignKey("account_id")]
     public Account account { get; set; }
 
     public User() {
