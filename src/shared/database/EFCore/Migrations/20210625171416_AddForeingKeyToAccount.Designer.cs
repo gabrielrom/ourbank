@@ -10,7 +10,7 @@ using ourbank.DBContext;
 namespace ourbank.src.shared.database.EFCore.Migrations
 {
     [DbContext(typeof(DBContext.DBContext))]
-    [Migration("20210620215248_AddForeingKeyToAccount")]
+    [Migration("20210625171416_AddForeingKeyToAccount")]
     partial class AddForeingKeyToAccount
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,8 +53,9 @@ namespace ourbank.src.shared.database.EFCore.Migrations
                     b.Property<string>("id")
                         .HasColumnType("text");
 
-                    b.Property<string>("account_id")
-                        .HasColumnType("text");
+                    b.Property<string>("accountId")
+                        .HasColumnType("text")
+                        .HasColumnName("account_id");
 
                     b.Property<string>("avatar_url")
                         .HasColumnType("text");
@@ -79,7 +80,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("account_id");
+                    b.HasIndex("accountId");
 
                     b.ToTable("Users");
                 });
@@ -87,8 +88,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
             modelBuilder.Entity("ourbank.entities.User", b =>
                 {
                     b.HasOne("ourbank.entities.Account", "account")
-                        .WithMany()
-                        .HasForeignKey("FK_Users_Accounts_account_id");
+                        .WithOne();
 
                     b.Navigation("account");
                 });
