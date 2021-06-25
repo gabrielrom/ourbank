@@ -1,5 +1,6 @@
 using ourbank.entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ourbank.Repositories {
   public class AccountsRepository : IAccountsRepository {
@@ -35,5 +36,28 @@ namespace ourbank.Repositories {
       _repository.SaveChanges();
     }
 
+    public Account findByAccountNumber(string account_number) {
+      Account account = _repository.Accounts.FirstOrDefault(account => 
+        account.account_number == account_number
+      );
+
+      return account;
+    }
+
+    public void transfer(
+      Account accountSender, 
+      Account accountRecipient, 
+      decimal value
+    ) {
+      accountSender.balance -= value;
+      accountRecipient.balance += value;
+
+      _repository.UpdateRange(
+        accountSender, 
+        accountRecipient
+      );
+
+      _repository.SaveChanges();
+    }
   }
 }
