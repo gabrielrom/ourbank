@@ -23,7 +23,7 @@ namespace ourbank.Utils {
 
       var tokenDescriptor = new SecurityTokenDescriptor {
         Subject = new ClaimsIdentity(new Claim[] {
-          new Claim("user_id", user.id.ToString()),
+          new Claim(ClaimTypes.PrimarySid, user.id),
         }),
 
         Expires = DateTime.UtcNow.AddHours(2),

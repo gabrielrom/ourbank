@@ -20,5 +20,20 @@ namespace ourbank.Repositories {
       return account;
 
     }
+
+    public Account findById(string account_id) {
+      Account account = _repository.Accounts.Find(account_id);
+
+      return account;
+    }
+
+    public void addFirstDeposit(Account account, decimal deposit_value) {
+      account.balance += deposit_value;
+      account.isFirstDeposit = false;
+
+      _repository.Update(account);
+      _repository.SaveChanges();
+    }
+
   }
 }

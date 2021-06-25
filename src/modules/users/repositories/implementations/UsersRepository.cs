@@ -32,5 +32,10 @@ namespace ourbank.Repositories {
       return user;
     }
 
+    public User findById(string user_id) {
+      User user = _repository.Users.Find(user_id);
+
+      return user;
+    }
   }
 }
