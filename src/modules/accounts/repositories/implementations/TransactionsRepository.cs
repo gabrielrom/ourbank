@@ -1,6 +1,8 @@
 using ourbank.entities;
 using Microsoft.AspNetCore.Mvc;
 using ourbank.dtos;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ourbank.Repositories {
   public class TransactionsRepository : ITransactionsRepository {
@@ -23,6 +25,26 @@ namespace ourbank.Repositories {
 
 
       return transaction;
+    }
+
+    public List<Transaction> findById(
+      string user_id, 
+      int number_max = 0
+    ) {
+      
+      List<Transaction> transactions = _repository
+      .Transactions.Where(transaction => 
+        transaction.sender_id == user_id 
+        || transaction.recipient_id == user_id
+      )
+      .OrderByDescending(transaction => transaction.created_at)
+      .ToList();
+
+      if (number_max != 0) {
+        transactions = transactions.GetRange(0, number_max);
+      }
+
+      return transactions;
     }
   }
 }
