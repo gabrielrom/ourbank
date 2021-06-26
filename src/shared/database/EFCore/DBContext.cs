@@ -8,6 +8,7 @@ namespace ourbank.DBContext {
   public class DBContext : DbContext {
     public DbSet<User> Users { get; set; }
     public DbSet<Account> Accounts { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
 
     public DBContext (DbContextOptions<DBContext> options) : base(options) {}
 

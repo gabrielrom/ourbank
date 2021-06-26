@@ -45,7 +45,9 @@ namespace ourbank.sevices {
       return new {
         user = new {
           name = user.name,
-          email = user.email
+          email = user.email,
+          avatar = user.avatar_url,
+          account_id = user.accountId
         },
         token = tokenJWT
       };

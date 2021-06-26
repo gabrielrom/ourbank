@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading.Tasks;
 
 namespace ourbank.entities {
   public class Account : BaseEntity {
@@ -33,7 +33,7 @@ namespace ourbank.entities {
     public void GenerateAccountNumber() {
       var random = new Random();
 
-      string bank_branch = random.Next(0, 9999).ToString();
+      string bank_branch = random.Next(1000, 9999).ToString();
       string account_number = random.Next(100000000, 999999999).ToString();
 
       this.bank_branch = bank_branch;
