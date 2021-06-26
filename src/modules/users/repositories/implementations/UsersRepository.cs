@@ -37,5 +37,13 @@ namespace ourbank.Repositories {
 
       return user;
     }
+
+    public User findByAccountId(string account_id) {
+      User user = _repository.Users.FirstOrDefault(user => 
+        user.accountId == account_id
+      );
+
+      return user;
+    }
   }
 }

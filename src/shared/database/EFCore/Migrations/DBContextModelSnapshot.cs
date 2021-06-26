@@ -2,11 +2,13 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using ourbank.DBContext;
 
 namespace ourbank.src.shared.database.EFCore.Migrations
 {
-  [DbContext(typeof(DBContext.DBContext))]
+    [DbContext(typeof(DBContext.DBContext))]
     partial class DBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -132,7 +134,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
                         .WithMany();
 
                     b.Navigation("transactions");
-                });    
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -7,14 +7,17 @@ namespace ourbank.sevices {
 
     private IAccountsRepository _accountsRepository;
     private IUsersRepository _usersRepository;
+    private ITransactionsRepository _transactionsRepository;
 
     public TransferService (
       IAccountsRepository accountsRepository,
-      IUsersRepository usersRepository
+      IUsersRepository usersRepository,
+      ITransactionsRepository transactionsRepository
     ) {
       
       _accountsRepository = accountsRepository;
       _usersRepository = usersRepository;
+      _transactionsRepository = transactionsRepository;
     }
 
     public object execute(string sender_id, TransferDTO transfer) {
@@ -57,6 +60,17 @@ namespace ourbank.sevices {
         recipientAccount, 
         transfer.value
       );
+
+      var recipientUser = _usersRepository.findByAccountId(
+        recipientAccount.id
+      );
+
+      _transactionsRepository.create(new CreateTransactionDTO{
+        sender_id = sender_id,
+        recipient_id = recipientUser.id,
+        description = transfer.description,
+        value = transfer.value
+      });
 
       return new {
         message = "the transfer was successful!"

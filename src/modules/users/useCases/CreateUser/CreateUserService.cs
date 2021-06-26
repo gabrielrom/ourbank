@@ -16,10 +16,9 @@ namespace ourbank.sevices {
     ) {
       this._usersRepository = usersRepository;
       this._accountsRepository = accountsRepository;
-      ;
     }
     
-    public User execute(ICreateDTO data) {
+    public void execute(ICreateDTO data) {
       if (
         string.IsNullOrEmpty(data.name) || 
         string.IsNullOrEmpty(data.email) || 
@@ -48,8 +47,6 @@ namespace ourbank.sevices {
         password = hashedPassword,
         account_id = account.id
       });
-
-      return user;
     }
 
   }

@@ -5,12 +5,12 @@ using ourbank.sevices;
 using System.Linq;
 using System.Security.Claims;
 using ourbank.dtos;
-using System;
 
 namespace ourbank.Controllers {
   public class RequestTransferBody {
     public string bank_branch { get; set; }
     public string account_number { get; set; }
+    public string description { get; set; }
     public decimal value { get; set; }
   }
 
@@ -22,11 +22,13 @@ namespace ourbank.Controllers {
 
     public TransferController(
       IUsersRepository usersRepository,
-      IAccountsRepository accountsRepository
+      IAccountsRepository accountsRepository,
+      ITransactionsRepository transactionsRepository
     ) {
       _transferService = new TransferService(
         accountsRepository,
-        usersRepository
+        usersRepository,
+        transactionsRepository
       );
     }
 
@@ -40,6 +42,7 @@ namespace ourbank.Controllers {
       var result = _transferService.execute(user_id, new TransferDTO {
         account_number = request.account_number,
         bank_branch = request.bank_branch,
+        description = request.description,
         value = request.value
       });
 

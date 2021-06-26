@@ -24,8 +24,6 @@ namespace ourbank.entities {
     [Required]
     public bool isFirstDeposit { get; set; } = true;
 
-    public ICollection<Transaction> transactions { get; set; }
-
     public Account() {
       if (String.IsNullOrEmpty(this.id)) {
         this.id = Convert.ToString(Guid.NewGuid());
@@ -35,7 +33,7 @@ namespace ourbank.entities {
     public void GenerateAccountNumber() {
       var random = new Random();
 
-      string bank_branch = random.Next(0, 9999).ToString();
+      string bank_branch = random.Next(1000, 9999).ToString();
       string account_number = random.Next(100000000, 999999999).ToString();
 
       this.bank_branch = bank_branch;

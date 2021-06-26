@@ -27,21 +27,14 @@ namespace ourbank.Controllers {
     }
 
     [HttpPost]
-    public ObjectResult handle([FromBody] RequestBody request) {
-      User user = this._createUserService.execute(new ICreateDTO {
+    public StatusCodeResult handle([FromBody] RequestBody request) {
+      this._createUserService.execute(new ICreateDTO {
         name = request.name,
         email = request.email,
         password = request.password
       });
 
-      return StatusCode(201, new {
-        name = user.name,
-        email = user.email,
-        avatar_url = user.avatar_url,
-        account_id = user.accountId,
-        created_at = user.created_at,
-        updated_at = user.updated_at,
-      });
+      return StatusCode(201);
     }
   }
 }

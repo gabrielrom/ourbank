@@ -36,31 +36,34 @@ namespace ourbank.src.shared.database.EFCore.Migrations
                 column: "recipient_id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Transactions_Accounts_senderId",
+                name: "FK_Transactions_Users_senderId",
                 table: "Transactions",
                 column: "sender_id",
-                principalTable: "Accounts",
+                principalTable: "Users",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Transactions_Accounts_recipientId",
+                name: "FK_Transactions_Users_recipientId",
                 table: "Transactions",
                 column: "recipient_id",
-                principalTable: "Accounts",
+                principalTable: "Users",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
+
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-              name: "FK_Transactions_Accounts_recipientId",
+
+          migrationBuilder.DropForeignKey(
+              name: "FK_Transactions_Users_recipientId",
               table: "Transactions"
             );
 
             migrationBuilder.DropForeignKey(
-              name: "FK_Transactions_Accounts_senderId",
+              name: "FK_Transactions_Users_senderId",
               table: "Transactions"
             );
 
@@ -76,6 +79,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Transactions");
+            
         }
     }
 }

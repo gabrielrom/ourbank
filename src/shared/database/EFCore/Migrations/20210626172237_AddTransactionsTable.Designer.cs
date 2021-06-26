@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ourbank.src.shared.database.EFCore.Migrations
 {
   [DbContext(typeof(DBContext.DBContext))]
-    [Migration("20210626024021_AddTransactionsTable")]
+    [Migration("20210626172237_AddTransactionsTable")]
     partial class AddTransactionsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,7 +120,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ourbank.entities.User", b =>
+           modelBuilder.Entity("ourbank.entities.User", b =>
                 {
                     b.HasOne("ourbank.entities.Account", "account")
                         .WithOne();

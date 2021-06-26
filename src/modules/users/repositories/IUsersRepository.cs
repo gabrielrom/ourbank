@@ -12,5 +12,6 @@ namespace ourbank.Repositories {
     User create(ICreateDTO data);
     User findByEmail(string email);
     User findById(string user_id);
+    User findByAccountId(string account_id);
   }
 }
