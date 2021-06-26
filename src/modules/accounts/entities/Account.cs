@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading.Tasks;
 
 namespace ourbank.entities {
   public class Account : BaseEntity {
@@ -23,6 +23,8 @@ namespace ourbank.entities {
     [Column]
     [Required]
     public bool isFirstDeposit { get; set; } = true;
+
+    public ICollection<Transaction> transactions { get; set; }
 
     public Account() {
       if (String.IsNullOrEmpty(this.id)) {
