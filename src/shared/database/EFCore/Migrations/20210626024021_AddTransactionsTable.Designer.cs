@@ -2,14 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ourbank.src.shared.database.EFCore.Migrations
 {
   [DbContext(typeof(DBContext.DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210626024021_AddTransactionsTable")]
+    partial class AddTransactionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,7 +134,7 @@ namespace ourbank.src.shared.database.EFCore.Migrations
                         .WithMany();
 
                     b.Navigation("transactions");
-                });    
+                });
 #pragma warning restore 612, 618
         }
     }
