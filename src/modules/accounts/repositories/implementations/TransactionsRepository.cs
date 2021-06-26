@@ -41,7 +41,7 @@ namespace ourbank.Repositories {
       .ToList();
 
       if (number_max != 0) {
-        transactions = transactions.GetRange(0, number_max);
+        transactions = transactions.Take(number_max).ToList();
       }
 
       return transactions;
