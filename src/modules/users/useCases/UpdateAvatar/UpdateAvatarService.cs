@@ -21,6 +21,7 @@ namespace ourbank.sevices {
 
       if (user.avatar_url != null) {
         HandleFiles.deleteFile(
+          filepath: 
           $"{_enviroment.ContentRootPath}/tmp/avatars/{user.avatar_url}"
         );
       }
