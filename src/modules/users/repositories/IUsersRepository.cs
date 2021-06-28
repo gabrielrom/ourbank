@@ -13,5 +13,6 @@ namespace ourbank.Repositories {
     User findByEmail(string email);
     User findById(string user_id);
     User findByAccountId(string account_id);
+    void save();
   }
 }
