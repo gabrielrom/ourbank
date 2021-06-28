@@ -77,6 +77,13 @@ namespace ourbank {
       app.UseAuthentication();
       app.UseAuthorization();
       
+      app.UseWhen(
+        context => context.Request.Path.Value == "/users/avatar",
+        appBuilder => {
+          appBuilder.UseMiddleware<Upload>();
+        }
+      );
+      
       app.UseEndpoints(endpoints => {
         endpoints.MapControllers();
       });
