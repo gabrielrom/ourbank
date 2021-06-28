@@ -46,7 +46,7 @@ namespace ourbank.sevices {
         user = new {
           name = user.name,
           email = user.email,
-          avatar = user.avatar_url,
+          avatar = $"https://localhost:3333/avatar/{user.avatar_url}",
           account_id = user.accountId
         },
         token = tokenJWT
