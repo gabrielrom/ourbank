@@ -45,5 +45,9 @@ namespace ourbank.Repositories {
 
       return user;
     }
+
+    public void save() {
+      _repository.SaveChanges();
+    }
   }
 }
