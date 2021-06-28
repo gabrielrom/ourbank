@@ -16,6 +16,9 @@ using ourbank.Error;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using ourbank.Middlewares;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace ourbank {
   public class Startup {
@@ -56,7 +59,7 @@ namespace ourbank {
         };
       });
     }
-
+ 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
       if (env.IsDevelopment()) {
@@ -64,6 +67,12 @@ namespace ourbank {
       }
 
       app.UseHttpsRedirection();
+
+      app.UseStaticFiles(new StaticFileOptions {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(env.ContentRootPath, "tmp/avatars")),
+        RequestPath = "/avatar"
+      });
 
       app.UseRouting();
 
@@ -76,7 +85,7 @@ namespace ourbank {
       app.UseMiddleware<GlobalError>();
       app.UseAuthentication();
       app.UseAuthorization();
-      
+
       app.UseWhen(
         context => context.Request.Path.Value == "/users/avatar",
         appBuilder => {
