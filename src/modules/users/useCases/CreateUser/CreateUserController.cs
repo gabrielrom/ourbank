@@ -28,7 +28,7 @@ namespace ourbank.Controllers {
 
     [HttpPost]
     public StatusCodeResult handle([FromBody] RequestBody request) {
-      this._createUserService.execute(new ICreateDTO {
+      this._createUserService.execute(new() {
         name = request.name,
         email = request.email,
         password = request.password
